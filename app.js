@@ -24,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(app.router);
 
 app.get('/', routes.index);
+app.post('/', routes.sumbit);
 app.get('/users', users.list);
 
 /// catch 404 and forwarding to error handler

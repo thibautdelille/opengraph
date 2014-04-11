@@ -1,4 +1,4 @@
-var ogapi = require('../ogapi');
+var Controller = require('../controllers');
 
 /* GET home page. */
 exports.index = function(req, res){
