@@ -5,7 +5,7 @@ REST API to retrieve all open graph data included in a website.
 
 Every website should follow the [opengraph protocol](http://ogp.me/). Facebook use it to generate its links. opengraph API allow you to retrieve the og parameters from any url.
 ## Installation
-`npm install` to install the dependencies
+`npm install` to install the dependencies  
 `npm start` to start the server on port 3000: http://localhost:3000/
 `npm test` to run the tests (using http://vowsjs.org/)
 
