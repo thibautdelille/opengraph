@@ -4,24 +4,26 @@ var vows = require('vows'),
     assert = require('assert'),
     ogapi = require('../ogapi');
 
-vows.describe('Division by Zero').addBatch({
-    'when dividing a number by zero': {
-        topic: function () { return 42 / 0; },
+vows.describe('Test an url').addBatch({
+    'when the entry is a url': {
+        topic: ogapi.testUrl('http://www.google.com'),
 
-        'we get Infinity': function (topic) {
-            assert.equal (topic, Infinity);
+        'we get true': function (topic) {
+            assert.equal (topic, true);
         }
     },
-    'but when dividing zero by zero': {
-        topic: function () { return 0 / 0; },
+    'when the entry is a number': {
+        topic: ogapi.testUrl(1),
 
-        'we get a value which': {
-            'is not a number': function (topic) {
-                assert.isNaN (topic);
-            },
-            'is not equal to itself': function (topic) {
-                assert.notEqual (topic, topic);
-            }
+        'we get false': function (topic) {
+            assert.equal (topic, false);
+        }
+    },
+    'when the entry is a string': {
+        topic: ogapi.testUrl('test'),
+
+        'we get false': function (topic) {
+            assert.equal (topic, false);
         }
     }
 }).run();
