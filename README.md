@@ -4,10 +4,13 @@ opengraph
 REST API to retrieve all open graph data included in a website.
 
 Every website should follow the [opengraph protocol](http://ogp.me/). Facebook use it to generate its links. opengraph API allow you to retrieve the og parameters from any url.
+## Installation
+`npm install` to install the dependencies
+`npm start` to start the server on port 3000: http://localhost:3000/
+`npm test` to run the tests (using http://vowsjs.org/)
 
-I'm going to start with the Basic Metadata
-- all  
-http://api.ogapi.me/all?url='http://www.thibautdelille.com'  
+## API
+- /all?url=[url] 
 ```json
 {
     title:'Thibaut Delille',
@@ -16,27 +19,23 @@ http://api.ogapi.me/all?url='http://www.thibautdelille.com'
     url:'http://www.thibautdelille.com'
 }
 ```
-- title  
-http://api.ogapi.me/title?url='http://www.thibautdelille.com'
+- /title?url=[url]  
 ```json
 {
     title:'Thibaut Delille'
 }
 ```
-- description  
-http://api.ogapi.me/description?url='http://www.thibautdelille.com'
+- /description?url=[url]  
 ```json
 {
     description: 'Interactive Developer'
 }
 ```
-- image  
-http://api.ogapi.me/image?url='http://www.thibautdelille.com'
+- /image?url=[url]  
 ```json
 http://www.thibautdelille.com/og.png
 ```
-- url  
-http://api.ogapi.me/url?url='http://www.thibautdelille.com'
+- /url?url=[url]   
 ```json
 {
     url:'http://www.thibautdelille.com'
