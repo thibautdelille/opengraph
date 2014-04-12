@@ -1,5 +1,6 @@
 opengraph
 =========
+[![Build Status](https://travis-ci.org/thibautdelille/opengraph.svg?branch=master)](https://travis-ci.org/thibautdelille/opengraph)
 
 REST API to retrieve all open graph data included in a website.
 
