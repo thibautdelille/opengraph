@@ -43,25 +43,23 @@ ogapi.openUrl = function(url, fn){
 };
 
 ogapi.parseDom = function(dom, fn){
-	if(!dom){
+	if(!dom||dom==''){
     fn(null);
+    return;
 	}
 
-	var json = {},
-		index = 0;
+	var json = null,
 		parser = new htmlparser.Parser({
     onopentag: function(name, attribs){
       if(name === "meta"){
-      	index = index+1;
+      	if(!json){
+      		json = {};
+      	}
       	json[attribs.property] = attribs.content;
       }
     },
     onend: function(){
-    	if(index === 0){
-      	fn(null);
-    	}else{
-      	fn(json);
-    	}
+     	fn(json);
     }
 	});
 	parser.write(dom);

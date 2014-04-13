@@ -37,16 +37,16 @@ vows.describe('Test the url opening').addBatch({
             assert.isString (dom);       // We have a stat object
         }
     }
-}).run();
+});
 
 vows.describe('Test the parsing').addBatch({
     'when I send a head dom': {
         topic: function() {
             ogapi.parseDom('<head></head>', this.callback);
         },
-        'we get an Object ': function (json, err) {
+        'we get a null object': function (json, err) {
             //assert.isNull   (err);        // We have no error
-            assert.isObject (json);       // We have a stat object
+            assert.isNull (json);       // We have a stat object
         }
     },
     'when I send a head with meta dom': {
@@ -72,7 +72,6 @@ vows.describe('Test the parsing').addBatch({
             ogapi.parseDom('test', this.callback);
         },
         'we get a null object': function (json, err) {
-            //assert.isNull   (err);        // We have no error
             assert.isNull(json);       // We have a stat object
         }
     }
