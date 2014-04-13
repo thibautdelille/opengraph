@@ -27,17 +27,6 @@ vows.describe('Test an url').addBatch({
         }
     }
 }).run();
-vows.describe('Test the url opening').addBatch({
-    'when I send a url': {
-        topic: function() {
-            ogapi.openUrl('http://www.google.com', this.callback);
-        },
-        'we get an String ': function (dom, err) {
-            //assert.isNull   (err);        // We have no error
-            assert.isString (dom);       // We have a stat object
-        }
-    }
-});
 
 vows.describe('Test the parsing').addBatch({
     'when I send a head dom': {
@@ -51,7 +40,7 @@ vows.describe('Test the parsing').addBatch({
     },
     'when I send a head with meta dom': {
         topic: function() {
-            ogapi.parseDom('<head><meta property="title" content="test"></meta></head>', this.callback);
+            ogapi.parseDom('<head><meta property="og:title" content="test"></meta></head>', this.callback);
         },
         'we get the title set to test': function (json, err) {
             //assert.isNull   (err);        // We have no error
@@ -73,6 +62,19 @@ vows.describe('Test the parsing').addBatch({
         },
         'we get a null object': function (json, err) {
             assert.isNull(json);       // We have a stat object
+        }
+    }
+}).run();
+
+vows.describe('Test the graph').addBatch({
+    'when I send a url': {
+        topic: function() {
+            ogapi.graph('http://beautyshop.thibautdelille.net', this.callback);
+        },
+        'we get an String ': function (json, err) {
+            //assert.isNull   (err);        // We have no error
+            assert.isObject (json);       // We have a stat object
+            assert.equal (json.title, 'BeautyShop - A Better You');       // We have a stat object
         }
     }
 }).run();

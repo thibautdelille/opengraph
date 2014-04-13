@@ -13,7 +13,7 @@ ogapi.testUrl = function(url){
 	return /^(http(s)?:\/\/[a-zA-Z0-9\-_]+\.[a-zA-Z]+(.)+)+/.test(url);
 };
 
-ogapi.graph = function(url fn){
+ogapi.graph = function(url, fn){
 	var self = this;
 	return self.openUrl(url, function(dom){
 		return self.parseDom(dom, fn);
@@ -41,10 +41,32 @@ ogapi.parseDom = function(dom, fn){
 		parser = new htmlparser.Parser({
     onopentag: function(name, attribs){
       if(name === "meta"){
-      	if(!json){
-      		json = {};
+      	switch(attribs.property){
+						case 'og:title':
+			      	if(!json){
+			      		json = {};
+			      	}
+							json['title'] = attribs.content;
+							break;
+						case 'og:description':
+			      	if(!json){
+			      		json = {};
+			      	}
+							json['description'] = attribs.content;
+							break;
+						case 'og:image':
+			      	if(!json){
+			      		json = {};
+			      	}
+							json['image'] = attribs.content;
+							break;
+						case 'og:url':
+			      	if(!json){
+			      		json = {};
+			      	}
+							json['url'] = attribs.content;
+							break;
       	}
-      	json[attribs.property] = attribs.content;
       }
     },
     onend: function(){
