@@ -64,7 +64,3 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = app;
-
-var json = ogapi.graphDom('<head><meta property="title" content="test"></meta></head>');
-
-console.log(json);

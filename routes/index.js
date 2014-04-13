@@ -5,5 +5,7 @@ exports.index = function(req, res){
   res.render('index', { title: 'OpenGraph API', api: '' });
 };
 exports.sumbit = function(req, res){
-  res.render('index', { title: 'OpenGraph API', api: ogapi.openUrl(req.body.url)});
+	ogapi.graph(req.body.url, function(json){
+	  res.render('index', { title: 'OpenGraph API', api: json.toString()});
+	})
 };
