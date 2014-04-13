@@ -13,22 +13,11 @@ ogapi.testUrl = function(url){
 	return /^(http(s)?:\/\/[a-zA-Z0-9\-_]+\.[a-zA-Z]+(.)+)+/.test(url);
 };
 
-ogapi.graph = function(url){
+ogapi.graph = function(url fn){
 	var self = this;
 	return self.openUrl(url, function(dom){
-		return self.parseDom(dom, function(content){
-			return content;
-		});
+		return self.parseDom(dom, fn);
 	})
-};
-
-ogapi.graphDom = function(dom){
-	var self = this;
-	self.parseDom(dom, this.ongraph);
-};
-
-ogapi.ongraph = function(json){
-	console.log('ongraph', json);
 };
 
 ogapi.openUrl = function(url, fn){
