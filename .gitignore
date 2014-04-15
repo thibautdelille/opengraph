@@ -26,3 +26,5 @@ node_modules
 
 # Grunt task for Front End
 public/stylesheets/
+public/javascripts/
+public/vendors/
