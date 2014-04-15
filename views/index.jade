@@ -1,10 +1,11 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  form(action="/", method="post")
-    input(value="enter an url...", name="url")
-    button(type="submit") submit
-  p #{api}
-  p #{error}
+  section
+    h1= title
+    p A way to share url accross all you social media
+    form(action="/", method="post")
+      input(value="enter an url...", name="url")
+      button(type="submit") submit
+    p #{api}
+    p #{error}

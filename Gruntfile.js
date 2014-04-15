@@ -213,11 +213,11 @@ module.exports = function(grunt) {
     */
     watch: {
       scss: {
-        files: ['assets/scss/**/*.scss'],
+        files: ['public/scss/**/*.scss'],
         tasks: ['scss']
       },
       js: {
-        files: ['assets/js/*.js'],
+        files: ['public/js/*.js'],
         tasks: ['js']
       },
       livereload: {
@@ -225,7 +225,7 @@ module.exports = function(grunt) {
           livereload: true
         },
         files: [
-          'view/**/*.jade',
+          'views/**/*.jade',
           'public/stylesheets/{,*/}*.css',
           'public/javascripts/{,*/}*.js'
         ]
