@@ -115,17 +115,17 @@ module.exports = function(grunt) {
     * url: https://github.com/dannygarcia/grunt-jekyll
     * description: Run Jekyll
     */
-    jekyll: {
-      options: {
-        src: './jekyll'
-      },
-      dev: {
-        options: {
-          dest: './dist',
-          config: '_config.yml'
-        }
-      }
-    },
+    // jekyll: {
+    //   options: {
+    //     src: './jekyll'
+    //   },
+    //   dev: {
+    //     options: {
+    //       dest: './dist',
+    //       config: '_config.yml'
+    //     }
+    //   }
+    // },
 
     /*
     * url: https://github.com/gruntjs/grunt-contrib-jshint
@@ -242,7 +242,6 @@ module.exports = function(grunt) {
 
   grunt.registerTask('dev', ['watch']);
 
-  grunt.loadNpmTasks('grunt-jekyll');
   grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-modernizr');
   grunt.loadNpmTasks('grunt-autoprefixer');

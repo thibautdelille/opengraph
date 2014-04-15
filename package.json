@@ -6,6 +6,10 @@
     "start": "node ./bin/www",
     "test": "node ./test/ogapi-test.js"
   },
+  "author": {
+    "name": "Thibaut Delille",
+    "url": "http://www.thibautdelille.com"
+  },
   "dependencies": {
     "express": "~3.4.8",
     "static-favicon": "~1.0.0",
