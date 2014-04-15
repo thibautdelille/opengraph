@@ -3,7 +3,6 @@ module.exports = function(grunt) {
   grunt.initConfig({
     // load our main definition package
     pkg: grunt.file.readJSON('package.json'),
-    site: grunt.file.readYAML('_config.yml'),
 
     /*
     * url: https://github.com/ai/autoprefixer
@@ -39,18 +38,18 @@ module.exports = function(grunt) {
       options: {
         separator: ';',
         stripBanners: true,
-        banner: '/*!\n<%= pkg.name %>\nv<%= site.version %>\n<%= grunt.template.today("mm-dd-yyyy") %>\nMade by <%= pkg.author.name %> - <%= pkg.author.url %>\n*/'
+        banner: '/*!\n<%= pkg.name %>\nv<%= pkg.version %>\n<%= grunt.template.today("mm-dd-yyyy") %>\nMade by <%= pkg.author.name %> - <%= pkg.author.url %>\n*/'
       },
       js: {
-        src: ['assets/vendors/modernizr/modernizr.js', 'assets/js/*.js'],
-        dest: 'assets/js/script.js'
+        src: ['public/vendors/modernizr/modernizr.js', 'public/js/*.js'],
+        dest: 'public/javascripts/script.js'
       },
       css: {
         options: {
           separator: '',
         },
-        src: ['assets/css/style.autoprefixed.css' ],
-        dest: 'assets/css/style.css'
+        src: ['public/stylesheets/style.autoprefixed.css' ],
+        dest: 'public/stylesheets/style.css'
       }
     },
 
@@ -58,44 +57,44 @@ module.exports = function(grunt) {
     * url: https://github.com/gruntjs/grunt-contrib-connect
     * description: start a server on port 8000 for the documentation
     */
-    connect: {
-      server: {
-        options: {
-          hostname: '*',
-          port: 8000,
-          base: 'dist/'
-        }
-      }
-    },
+    // connect: {
+    //   server: {
+    //     options: {
+    //       hostname: '*',
+    //       port: 8000,
+    //       base: 'dist/'
+    //     }
+    //   }
+    // },
 
     /*
     * url: https://github.com/gruntjs/grunt-contrib-copy
     * description: copy icon, js and vendors into the documentation
     */
-    copy: {
-      // Copy vendors to Jekyll folder
-      vendors: {
-        files: [
-          { 
-            expand: true, 
-            cwd: './assets/vendors', 
-            src: ['./**/*.*', '!./modernizr/modernizr.js'], 
-            dest: 'jekyll/assets/vendors/' 
-          }
-        ]
-      },
-      // Copy img to Jekyll folder
-      images: {
-        files: [
-          { 
-            expand: true, 
-            cwd: './assets/img', 
-            src: ['./**/*.*'], 
-            dest: 'jekyll/assets/vendors/' 
-          }
-        ]
-      }
-    },
+    // copy: {
+    //   // Copy vendors to Jekyll folder
+    //   vendors: {
+    //     files: [
+    //       {
+    //         expand: true,
+    //         cwd: './assets/vendors',
+    //         src: ['./**/*.*', '!./modernizr/modernizr.js'],
+    //         dest: 'jekyll/assets/vendors/'
+    //       }
+    //     ]
+    //   },
+    //   // Copy img to Jekyll folder
+    //   images: {
+    //     files: [
+    //       {
+    //         expand: true,
+    //         cwd: './assets/img',
+    //         src: ['./**/*.*'],
+    //         dest: 'jekyll/assets/vendors/'
+    //       }
+    //     ]
+    //   }
+    // },
 
     /*
     * url: https://github.com/gruntjs/grunt-contrib-cssmin
@@ -105,16 +104,9 @@ module.exports = function(grunt) {
     cssmin: {
       dist: {
         expand: true,
-        cwd: 'assets/css/',
+        cwd: 'public/stylesheets/',
         src: ['*.css', '!*.min.css', '!*.sass.css', '!*.autoprefixed.css'],
-        dest: 'dist/assets/css/',
-        ext: '.min.css'
-      },
-      jekyll: {
-        expand: true,
-        cwd: 'assets/css/',
-        src: ['*.css', '!*.min.css', '!*.sass.css', '!*.autoprefixed.css'],
-        dest: 'jekyll/assets/css/',
+        dest: 'public/stylesheets/',
         ext: '.min.css'
       }
     },
@@ -141,7 +133,7 @@ module.exports = function(grunt) {
     */
     jshint: {
       all: [
-        'assets/js/**/*.js', '!assets/js/script*.js'
+        'public/js/**/*.js'
       ],
       options: {
         jshintrc: '.jshintrc'
@@ -153,8 +145,8 @@ module.exports = function(grunt) {
     * description: sifts through your project files, gathers up your references to Modernizr tests and outputs a lean, mean Modernizr machine.
     */
     modernizr: {
-      "devFile" : "assets/vendors/modernizr/modernizr-dev.js",
-      "outputFile" : "assets/vendors/modernizr/modernizr.js",
+      "devFile" : "public/vendors/modernizr/modernizr-dev.js",
+      "outputFile" : "public/vendors/modernizr/modernizr.js",
       "extra" : {
         "shiv" : true,
         "printshiv" : false,
@@ -188,8 +180,8 @@ module.exports = function(grunt) {
         files : [
           {
             src : ['style.scss'],
-            cwd : 'assets/scss',
-            dest : 'assets/css/',
+            cwd : 'public/scss',
+            dest : 'public/stylesheets/',
             ext : '.sass.css',
             expand : true
           }
@@ -210,7 +202,7 @@ module.exports = function(grunt) {
       },
       js: {
         files: {
-          'jekyll/assets/js/script.min.js': ['assets/js/script.js']
+          'public/javascripts/script.min.js': ['public/javascripts/script.js']
         }
       }
     },
@@ -228,18 +220,14 @@ module.exports = function(grunt) {
         files: ['assets/js/*.js'],
         tasks: ['js']
       },
-      jekyll: {
-        files: ['jekyll/**/*.markdown', 'jekyll/**/*.md',  'jekyll/**/*.html'],
-        tasks: 'jekyll'
-      },
       livereload: {
         options: {
           livereload: true
         },
         files: [
-          'dist/**/*.html',
-          'dist/assets/css/{,*/}*.css',
-          'dist/assets/js/{,*/}*.js'
+          'view/**/*.jade',
+          'public/stylesheets/{,*/}*.css',
+          'public/javascripts/{,*/}*.js'
         ]
       }
     }
@@ -249,12 +237,10 @@ module.exports = function(grunt) {
 
   grunt.registerTask('scss', ['sass', 'autoprefixer', 'concat:css', 'cssmin']);
   grunt.registerTask('js', ['jshint', 'modernizr', 'concat:js', 'uglify:js']);
-  grunt.registerTask('vendors', ['copy:vendors']);
-  grunt.registerTask('images', ['copy:images']);
 
-  grunt.registerTask('default', ['scss', 'js', 'images','vendors', 'jekyll']);
+  grunt.registerTask('default', ['scss', 'js']);
 
-  grunt.registerTask('dev', ['connect', 'watch']);
+  grunt.registerTask('dev', ['watch']);
 
   grunt.loadNpmTasks('grunt-jekyll');
   grunt.loadNpmTasks('grunt-sass');
